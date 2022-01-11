@@ -1,0 +1,43 @@
+#server
+server:
+  port: 8989
+
+#postgresql
+spring:
+  #======================数据库配置============================
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_test1
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+#type: com.alibaba.druid.pool.DruidDataSource
+
+#======================mybatis配置============================
+mybatis:
+  configuration:
+    # 返回主键
+    use-generated-keys: true
+    # 开启驼峰功能
+    map-underscore-to-camel-case: true
+  #mapper.xml中引用到的的实体类不写全类名，只写一个实体类名时，会用到下面这个配置
+  type-aliases-package: com.lzy.pojo
+  # mapper的位置
+  mapper-locations: classpath*:com/lzy/**/*.xml
+
+#======================mapper配置============================
+mapper:
+  mappers:
+    - com.lzy.common.BaseMapper
+  # 对于一般的getAllIfColumnNode，是否判断!=''，默认不判断
+  not-empty: false
+  # 获取主键自增回写SQL
+  IDENTITY: SELECT nextval({0})
+  # 指定序列格式化方式 nextval({0}) 获取下一个id
+  # 当实体类指定序列是必须开启此配置
+  seq-format: nextval({0})
+  # 写入之前
+  before: true
+  # 是否只处理基本类型: 当为true时才会处理arry和jsonb处理复杂类型
+  use-simple-type: false
+
+

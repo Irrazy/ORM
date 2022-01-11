@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "generator.targetProject",
+      "type": "java.lang.String",
+      "description": "Description for generator.targetProject."
+  }
+] }

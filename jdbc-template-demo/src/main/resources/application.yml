@@ -1,0 +1,13 @@
+#server
+server:
+  port: 8989
+
+#postgresql
+spring:
+  #======================\u6570\u636E\u5E93\u914D\u7F6E============================
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_test1
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+#type: com.alibaba.druid.pool.DruidDataSource

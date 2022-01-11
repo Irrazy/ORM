@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace属性相当于映射文件的名称 属性值任意-->
+<mapper namespace="com.lzy.mapper.UserMapper">
+
+    <!-- resultType属性指定结果的类型 -->
+    <select id="findUserList" resultType="user">
+        select * from public.user
+    </select>
+    <!-- ParameType属性指定输入参数的类型
+     如果参数类型是简单类型（基本 + String + date）#{xxx}里面的内容任意-->
+    <select id="findUserById" resultType="user" parameterType="int">
+        select * from public.user where id = #{id}
+    </select>
+
+    <!-- 用${value}作为 里面的内容必须是value 利用的是String的存储方式（value[]数组）-->
+    <select id="findUserByName" resultType="user" parameterType="string">
+        select * from public.user where account like '%${value}%'
+    </select>
+
+
+    <!-- pageSize 分页大小 currentPage当前页码 -->
+    <select id="findUserByPage" resultType="user">
+        select * from public.user limit #{pageSize} offset #{currentPage}
+    </select>
+
+    <!-- insert 插入数据 只有parameterType输入参数
+        useGeneratedKeys属性指定开启自动填充功能-主键自增开启
+        keyProperty属性用于指定生成的主键值填充到类的哪个属性上 -->
+    <insert id="insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        insert into public.user values(null, #{account}, #{password})
+    </insert>
+
+    <!-- update 同样只有输入参数parameterType-->
+    <update id="updateUser" parameterType="user">
+        update public.user set account = #{account}, password = #{password}
+        where id = #{id}
+    </update>
+
+    <!-- delete 也是输入参数 -->
+    <delete id="deleteUser" parameterType="int">
+        delete from public.user where id = #{id}
+    </delete>
+
+</mapper>

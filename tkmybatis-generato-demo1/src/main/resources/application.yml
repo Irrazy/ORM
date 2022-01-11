@@ -1,0 +1,27 @@
+#server
+server:
+  port: 8989
+
+#postgresql
+spring:
+  #======================数据库配置============================
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_test1
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+#type: com.alibaba.druid.pool.DruidDataSource
+
+#======================mybatis配置============================
+mybatis:
+  configuration:
+    # 返回主键
+    use-generated-keys: true
+    # 开启驼峰功能
+    map-underscore-to-camel-case: true
+  #mapper.xml中引用到的的实体类不写全类名，只写一个实体类名时，会用到下面这个配置
+  type-aliases-package: com.lzy.pojo
+  # mapper的位置
+  mapper-locations: classpath*:com/lzy/**/*.xml
+
+
